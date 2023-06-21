@@ -1,6 +1,6 @@
 import css from "./Button.module.css";
 
-export const Button = ({ type = "button", children, ...otherProps }) => {
+export const Button = ({ type = "button", children }) => {
   return (
     <button className={css.btn} type={type}>
       {children}
