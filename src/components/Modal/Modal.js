@@ -1,8 +1,17 @@
 import React from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { editTask } from "../../redux/tasksSlice";
 
 const Modal = ({ setIsOpen }) => {
+  const dispatch = useDispatch();
+
+  const tasks = useSelector((state) => state.tasks);
+  const task = tasks.find((task) => task.id === 3);
+  console.log(task.text);
+
+  const handleEdit = () => dispatch(editTask(text));
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -14,9 +23,10 @@ const Modal = ({ setIsOpen }) => {
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
-          <div className={styles.modalContent}>
+          <textarea rows={3} cols={20} placeholder={task.text}></textarea>
+          {/* <div className={styles.modalContent}>
             Are you sure you want to delete the item?
-          </div>
+          </div> */}
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>
               <button

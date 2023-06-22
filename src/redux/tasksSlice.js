@@ -12,7 +12,7 @@ const initialState = {
 
 const tasksSlice = createSlice({
   name: "tasks",
-  initialState: initialState.tasks,
+  initialState,
   reducers: {
     addTask: {
       reducer(state, action) {
@@ -23,6 +23,20 @@ const tasksSlice = createSlice({
           payload: {
             text,
             id: nanoid(),
+            completed: false,
+          },
+        };
+      },
+    },
+    editTask: {
+      reducer(state, action) {
+        state.tasks.push(action.payload);
+      },
+      prepare(text) {
+        return {
+          payload: {
+            text,
+            // id: nanoid(),
             completed: false,
           },
         };
@@ -43,5 +57,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, deleteTask, toggleCompleted } = tasksSlice.actions;
+export const { addTask, deleteTask, toggleCompleted, editTask } =
+  tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;

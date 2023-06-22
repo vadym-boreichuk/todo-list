@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 import { tasksReducer } from "./tasksSlice";
 
 const persistConfig = {
-  key: "root",
+  key: "tasks",
   version: 1,
   storage,
 };

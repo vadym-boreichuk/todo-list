@@ -5,9 +5,7 @@ import css from "./TaskList.module.css";
 
 export const TaskList = () => {
   const tasks = useSelector((state) => state.tasks);
-
-  console.log(tasks);
-
+  // console.log(tasks);
   return (
     <ul className={css.list}>
       {tasks.map((task) => (
