@@ -10,7 +10,7 @@ export const TaskList = () => {
     <ul className={css.list}>
       {tasks.map((task) => (
         <li key={task.id} className={css.listItem}>
-          <Task task={task} />
+          <Task task={task} id={task.id} />
         </li>
       ))}
     </ul>

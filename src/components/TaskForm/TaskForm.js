@@ -2,26 +2,45 @@ import { useDispatch } from "react-redux";
 import { Button } from "../Button/Button";
 import css from "./TaskForm.module.css";
 import { addTask } from "../../redux/tasksSlice";
+import Modal from "../Modal/Modal";
+import { useState } from "react";
 
 export const TaskForm = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [newText, setNewText] = useState("");
+
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    dispatch(addTask(form.elements.text.value));
-    form.reset();
+  const handleTextareaChange = (event) => {
+    setNewText(event.target.value);
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <input
-        className={css.field}
-        type="text"
-        name="text"
-        placeholder="Enter task text..."
-      />
-      <Button type="submit">Add task</Button>
-    </form>
+    <div>
+      <div className={css.divBtn} onClick={() => setIsOpen(true)}>
+        <Button>Add task</Button>
+      </div>
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen}>
+          <textarea
+            className={css.textArea}
+            cols={40}
+            rows={8}
+            value={newText}
+            onChange={handleTextareaChange}
+          />
+          <button
+            className={css.saveBtn}
+            onClick={() => {
+              setIsOpen(false);
+              dispatch(addTask(newText));
+              setNewText("");
+            }}
+          >
+            Save
+          </button>
+        </Modal>
+      )}
+    </div>
   );
 };

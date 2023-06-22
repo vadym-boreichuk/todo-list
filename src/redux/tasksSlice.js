@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const tasksSlice = createSlice({
-  name: "tasks",
+  name: "root",
   initialState,
   reducers: {
     addTask: {
@@ -30,14 +30,20 @@ const tasksSlice = createSlice({
     },
     editTask: {
       reducer(state, action) {
-        state.tasks.push(action.payload);
+        const { taskId, newText } = action.payload;
+        const updatedTasks = state.tasks.map((task) => {
+          if (task.id === taskId) {
+            return { ...task, text: newText };
+          }
+          return task;
+        });
+        return { ...state, tasks: updatedTasks };
       },
-      prepare(text) {
+      prepare(taskId, newText) {
         return {
           payload: {
-            text,
-            // id: nanoid(),
-            completed: false,
+            taskId,
+            newText,
           },
         };
       },
