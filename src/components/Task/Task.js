@@ -1,20 +1,17 @@
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import css from "./Task.module.css";
-import { useDispatch } from "react-redux";
 import { deleteTask, editTask, toggleCompleted } from "../../redux/tasksSlice";
-import { useState } from "react";
 import Modal from "../Modal/Modal";
 
-// import styles from "../App.module.css";
-
 export const Task = ({ task, id }) => {
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const [newText, setNewText] = useState("");
 
+  const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteTask(task.id));
   const handleToogle = () => dispatch(toggleCompleted(task.id));
-
-  const [newText, setNewText] = useState("");
 
   const handleTextareaChange = (event) => {
     setNewText(event.target.value);
@@ -49,6 +46,7 @@ export const Task = ({ task, id }) => {
             cols={40}
             rows={8}
             value={newText}
+            placeholder="Edit your task"
             onChange={handleTextareaChange}
           />
           <button

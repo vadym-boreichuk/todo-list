@@ -7,9 +7,7 @@ const Modal = ({ setIsOpen, children }) => {
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
       <div className={styles.centered}>
         <div className={styles.modal}>
-          <div className={styles.modalHeader}>
-            {/* <h5 className={styles.heading}>Dialog</h5> */}
-          </div>
+          <div className={styles.modalHeader}></div>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
@@ -17,7 +15,6 @@ const Modal = ({ setIsOpen, children }) => {
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>
               {children}
-
               <button
                 className={styles.cancelBtn}
                 onClick={() => setIsOpen(false)}

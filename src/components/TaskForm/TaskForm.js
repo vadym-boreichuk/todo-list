@@ -27,6 +27,7 @@ export const TaskForm = () => {
             cols={40}
             rows={8}
             value={newText}
+            placeholder="Add a new task"
             onChange={handleTextareaChange}
           />
           <button
